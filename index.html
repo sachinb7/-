@@ -1,206 +1,558 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sachin | Engineering & Insights</title>
+    <title>Sachin | Software Engineer</title>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap");
-
-        :root {
-            --bg: #fdfdfd;
-            --accent: #1a1a1a;
-            --secondary: #666;
-            --highlight: #ff3e00;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        /* Professional Dark Palette */
+        --bg-color: #0a192f;
+        --card-bg: rgba(17, 34, 64, 0.7);
+        --text-primary: #ccd6f6;
+        --text-secondary: #8892b0;
+        --accent: #64ffda; /* Electric Teal */
+        --hover-bg: rgba(100, 255, 218, 0.1);
         
-        body { 
-            background: var(--bg); 
-            color: var(--accent); 
-            font-family: 'Outfit', sans-serif;
-            line-height: 1.5;
-        }
-
-        /* --- TYPOGRAPHY --- */
-        h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 8rem); line-height: 0.9; }
-        h2 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: -1px; }
-        p { font-size: 1.1rem; color: var(--secondary); max-width: 600px; }
-
-        /* --- LAYOUT --- */
-        .wrapper { padding: 0 5%; }
+        --font-main: 'Inter', sans-serif;
+        --font-mono: 'Fira Code', monospace;
         
-        header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border-bottom: 1px solid #eee;
+        --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        font-family: var(--font-main);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* --- Navigation --- */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 1.5rem 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(10, 25, 47, 0.85);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+        box-shadow: 0 10px 30px -10px rgba(2,12,27,0.7);
+      }
+
+      .logo {
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 1.2rem;
+        letter-spacing: -1px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+
+      .btn-resume {
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: var(--transition);
+      }
+
+      .btn-resume:hover {
+        background: var(--hover-bg);
+      }
+
+      /* --- Layout Utilities --- */
+      section {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 6rem 1.5rem;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-header h2 {
+        font-size: 1.8rem;
+        color: var(--text-primary);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+      }
+
+      .section-header h2::before {
+        content: "0" counter(section) ".";
+        counter-increment: section;
+        margin-right: 10px;
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+
+      .section-header::after {
+        content: "";
+        display: block;
+        width: 300px;
+        height: 1px;
+        background: #233554;
+        margin-left: 20px;
+      }
+
+      body {
+        counter-reset: section;
+      }
+
+      /* --- Hero Section --- */
+      #hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 0;
+      }
+
+      .hero-greeting {
+        color: var(--accent);
+        font-family: var(--font-mono);
+        margin-bottom: 1.2rem;
+        font-size: 1rem;
+      }
+
+      .hero-name {
+        font-size: clamp(40px, 8vw, 80px);
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.1;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(30px, 5vw, 60px);
+        font-weight: 700;
+        color: var(--text-secondary);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-desc {
+        max-width: 540px;
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        margin-bottom: 3rem;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 1.25rem 1.75rem;
+        color: var(--accent);
+        background-color: transparent;
+        border: 1px solid var(--accent);
+        border-radius: 4px;
+        font-family: var(--font-mono);
+        text-decoration: none;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .cta-button:hover {
+        background: var(--hover-bg);
+        transform: translateY(-3px);
+      }
+
+      /* --- About --- */
+      .about-content {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 50px;
+      }
+
+      .about-text p {
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+      }
+
+      .tech-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(140px, 200px));
+        gap: 10px;
+        margin-top: 20px;
+        list-style: none;
+      }
+
+      .tech-list li {
+        position: relative;
+        padding-left: 20px;
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+
+      .tech-list li::before {
+        content: "▹";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+
+      /* --- Experience/Projects --- */
+      .project-card {
+        background-color: var(--card-bg);
+        padding: 2rem;
+        border-radius: 6px;
+        margin-bottom: 2rem;
+        transition: var(--transition);
+        border: 1px solid transparent;
+      }
+
+      .project-card:hover {
+        transform: translateY(-7px);
+        border-color: rgba(100, 255, 218, 0.2);
+        box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
+      }
+
+      .project-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .folder-icon {
+        color: var(--accent);
+        font-size: 2.5rem;
+      }
+
+      .project-links a {
+        color: var(--text-secondary);
+        font-size: 1.3rem;
+        margin-left: 1rem;
+        transition: var(--transition);
+      }
+
+      .project-links a:hover {
+        color: var(--accent);
+      }
+
+      .project-title {
+        color: var(--text-primary);
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .project-desc {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .project-tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        list-style: none;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      /* --- Blog Section --- */
+      .blog-preview {
+        text-align: center;
+        background: #112240;
+        padding: 4rem;
+        border-radius: 8px;
+      }
+      
+      .blog-preview h3 {
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .blog-preview p {
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* --- Footer --- */
+      footer {
+        padding: 2rem;
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+
+      footer a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      footer a:hover {
+        color: var(--accent);
+      }
+
+      /* --- Responsive --- */
+      @media (max-width: 768px) {
+        .about-content {
+          grid-template-columns: 1fr;
+        }
+        
+        .section-header::after {
+          width: 100px;
         }
 
-        section { padding: 120px 0; border-bottom: 1px solid #eee; }
-
-        .flex-row { display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; }
-        .col-left { flex: 1; min-width: 300px; }
-        .col-right { flex: 2; min-width: 300px; }
-
-        /* --- PROJECTS: MINIMALIST LIST --- */
-        .project-item {
-            padding: 40px 0;
-            border-top: 1px solid #eee;
-            transition: 0.3s;
-            display: block;
-            text-decoration: none;
-            color: inherit;
+        nav {
+            padding: 1.5rem;
         }
-        .project-item:hover { padding-left: 20px; color: var(--highlight); }
-        .project-item h3 { font-size: 2rem; margin-bottom: 10px; }
-        .tag-list { display: flex; gap: 10px; margin-top: 15px; }
-        .tag { font-size: 0.7rem; padding: 5px 12px; border: 1px solid #ddd; border-radius: 50px; text-transform: uppercase; color: #888; }
-
-        /* --- BLOG SECTION: THE "NEW" PART --- */
-        .blog-card {
-            background: #f9f9f9;
-            padding: 30px;
-            margin-bottom: 20px;
-            border-radius: 20px;
-            transition: background 0.3s;
+        
+        /* Simplified nav for mobile */
+        .nav-links {
+            display: none; 
         }
-        .blog-card:hover { background: #f0f0f0; }
-        .blog-category { color: var(--highlight); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; }
-
-        /* --- FOOTER --- */
-        footer { padding: 80px 5%; background: #000; color: #fff; text-align: center; }
-        .contact-link { font-size: 3rem; color: #fff; text-decoration: none; font-family: 'Playfair Display', serif; }
-        .contact-link:hover { font-style: italic; color: #ccc; }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 4rem; }
-            .col-right { flex: 1; }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
 
-    <div class="wrapper">
-        <header>
-            <p style="margin-bottom: 20px; font-weight: 700;">// FULL STACK ENGINEER</p>
-            <h1>Sachin<br><span style="color: #ddd;">Portfolio &nbsp;&nbsp;</span></h1>
-            <p style="margin-top: 40px;">Architecting digital systems with Java, React, and a focus on high-efficiency microservices.</p>
-        </header>
+    <nav>
+      <div class="logo">S.</div>
+      <ul class="nav-links">
+        <li><a href="#about"><span style="color:var(--accent)">01.</span> About</a></li>
+        <li><a href="#experience"><span style="color:var(--accent)">02.</span> Experience</a></li>
+        <li><a href="#work"><span style="color:var(--accent)">03.</span> Work</a></li>
+        <li><a href="https://medium.com/" target="_blank"><span style="color:var(--accent)">04.</span> Blog</a></li>
+      </ul>
+      <a href="mailto:email@example.com" class="btn-resume">Contact</a>
+    </nav>
 
-        <section id="about">
-            <div class="flex-row">
-                <div class="col-left"><h2>01/ Profile</h2></div>
-                <div class="col-right">
-                    <p>I specialize in building bridges between complex data and user-centric interfaces. My approach combines the rigor of backend engineering with the fluidity of modern frontend frameworks.</p>
-                    <div class="tag-list" style="margin-top: 30px;">
-                        <span class="tag">Spring Boot</span> <span class="tag">Node.js</span> <span class="tag">React</span> 
-                        <span class="tag">Docker</span> <span class="tag">Azure</span> <span class="tag">MongoDB</span>
-                    </div>
-                </div>
+    <section id="hero">
+      <p class="hero-greeting">Hi, my name is</p>
+      <h1 class="hero-name">Sachin.</h1>
+      <h2 class="hero-subtitle">I build things for the web.</h2>
+      <p class="hero-desc">
+        I am a Software Engineer specializing in building reliable, high-quality digital experiences. 
+        Currently focused on constructing scalable full-stack solutions and microservices architectures.
+      </p>
+      <a href="#work" class="cta-button">Check out my work</a>
+    </section>
+
+    <section id="about">
+      <div class="section-header">
+        <h2>About Me</h2>
+      </div>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            Hello! My name is Sachin and I enjoy creating things that live on the internet. My interest in web development started with a curiosity for how complex systems interact, which turns into a passion for full-stack engineering.
+          </p>
+          <p>
+            I’ve had the privilege of working at an <strong>engineering firm</strong> and a <strong>start-up environment</strong>. My main focus these days is building accessible, inclusive products and digital experiences for a variety of clients.
+          </p>
+          <p>Here are a few technologies I've been working with recently:</p>
+          <ul class="tech-list">
+            <li>Java & Spring Boot</li>
+            <li>JavaScript (ES6+)</li>
+            <li>React & Redux</li>
+            <li>Node.js</li>
+            <li>MongoDB & MySQL</li>
+            <li>Docker & Azure</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="section-header">
+        <h2>Where I've Worked</h2>
+      </div>
+      <div class="project-card" style="border-left: 2px solid var(--accent); border-radius: 0 4px 4px 0;">
+        <h3 style="color: var(--text-primary); font-size: 1.3rem;">Software Engineering Intern</h3>
+        <p style="color: var(--accent); font-family: var(--font-mono); margin-bottom: 1rem;">@ NCINGA PTE LTD</p>
+        <ul style="list-style: none; color: var(--text-secondary);">
+          <li style="margin-bottom: 10px; display: flex;"><span style="color:var(--accent); margin-right:10px">▹</span> Contributed to enterprise-grade software solutions in an agile environment.</li>
+          <li style="margin-bottom: 10px; display: flex;"><span style="color:var(--accent); margin-right:10px">▹</span> Collaborated with senior engineers to optimize backend logic and improve frontend responsiveness.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="section-header">
+        <h2>Some Things I've Built</h2>
+      </div>
+      
+      <div class="grid-3">
+        
+        <div class="project-card">
+          <div class="project-top">
+            <i class="fa-regular fa-folder folder-icon"></i>
+            <div class="project-links">
+              <a href="#"><i class="fa-brands fa-github"></i></a>
+              <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
             </div>
-        </section>
+          </div>
+          <h3 class="project-title">Financial Data Reconciliation</h3>
+          <p class="project-desc">
+            A high-performance microservices system designed to compare and validate transactions between EFTS and internal banking cores. Delivers critical reporting capabilities.
+          </p>
+          <ul class="project-tech-stack">
+            <li>Java Spring Boot</li>
+            <li>React</li>
+            <li>Docker</li>
+            <li>Microservices</li>
+          </ul>
+        </div>
 
-        <section id="work">
-            <div class="flex-row">
-                <div class="col-left"><h2>02/ Selected Systems</h2></div>
-                <div class="col-right">
-                    
-                    <div class="project-item">
-                        <h3>Finance Reconciliation Engine</h3>
-                        <p>A mission-critical microservices architecture designed to synchronize and validate global fund transfer switches with core banking databases.</p>
-                        <div class="tag-list">
-                            <span class="tag">Java</span> <span class="tag">Microservices</span> <span class="tag">Reliability</span>
-                        </div>
-                    </div>
-
-                    <div class="project-item">
-                        <h3>Hybrid Commerce Ecosystem</h3>
-                        <p>Connecting the physical and digital retail space through a unified POS and Cloud infrastructure, including integrated logistics for domestic delivery.</p>
-                        <div class="tag-list">
-                            <span class="tag">Cloud Architecture</span> <span class="tag">ERP</span> <span class="tag">Full Stack</span>
-                        </div>
-                    </div>
-
-                    <div class="project-item">
-                        <h3>Enterprise Productivity Monitor</h3>
-                        <p>Real-time analytics dashboard that hooks into ManageEngine APIs to provide high-level project visibility across organizational teams.</p>
-                        <div class="tag-list">
-                            <span class="tag">API Integration</span> <span class="tag">React</span>
-                        </div>
-                    </div>
-
-                </div>
+        <div class="project-card">
+          <div class="project-top">
+            <i class="fa-regular fa-folder folder-icon"></i>
+            <div class="project-links">
+              <a href="#"><i class="fa-brands fa-github"></i></a>
             </div>
-        </section>
+          </div>
+          <h3 class="project-title">Enterprise Time Tracker</h3>
+          <p class="project-desc">
+            An internal productivity tool integrating with ManageEngine APIs. Provides real-time project monitoring and advanced filtering for organizational efficiency.
+          </p>
+          <ul class="project-tech-stack">
+            <li>React + Redux</li>
+            <li>Spring Boot</li>
+            <li>REST APIs</li>
+          </ul>
+        </div>
 
-        <section id="blog">
-            <div class="flex-row">
-                <div class="col-left"><h2>03/ Insights</h2></div>
-                <div class="col-right">
-                    
-                    <div class="blog-card">
-                        <span class="blog-category">Tech Strategy</span>
-                        <h3 style="margin: 10px 0;">Why Microservices aren't always the answer</h3>
-                        <p>Reflecting on when to choose a monolith over distributed systems for internal tools.</p>
-                    </div>
-
-                    <div class="blog-card" style="opacity: 0.5;">
-                        <span class="blog-category">Tutorial</span>
-                        <h3 style="margin: 10px 0;">Optimizing Spring Boot for Docker</h3>
-                        <p>Content currently in progress. Stay tuned for engineering deep-dives.</p>
-                    </div>
-
-                </div>
+        <div class="project-card">
+          <div class="project-top">
+            <i class="fa-regular fa-folder folder-icon"></i>
+            <div class="project-links">
+              <a href="#"><i class="fa-brands fa-github"></i></a>
             </div>
-        </section>
+          </div>
+          <h3 class="project-title">Cloud E-Commerce ERP</h3>
+          <p class="project-desc">
+            A cloud-native platform bridging physical POS systems with online storefronts. Features a custom delivery partner integration service.
+          </p>
+          <ul class="project-tech-stack">
+            <li>Node.js</li>
+            <li>React</li>
+            <li>Azure</li>
+            <li>MySQL</li>
+          </ul>
+        </div>
 
-        <section id="background">
-            <div class="flex-row">
-                <div class="col-left"><h2>04/ Foundation</h2></div>
-                <div class="col-right">
-                    <div style="margin-bottom: 40px;">
-                        <h4 style="font-size: 1.5rem;">University of Moratuwa</h4>
-                        <p>Faculty of Information Technology — B.Sc (Hons) in IT</p>
-                    </div>
-                    <div>
-                        <h4 style="font-size: 1.5rem;">NCINGA</h4>
-                        <p>Software Engineering Internship — Enterprise Solutions</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+      </div>
+    </section>
+
+    <section id="blog">
+        <div class="section-header">
+            <h2>Technical Writing</h2>
+        </div>
+        <div class="blog-preview">
+            <h3>I write about what I learn.</h3>
+            <p>
+                I occasionally share my thoughts on software architecture, full-stack development challenges, and new technologies on Medium.
+            </p>
+            <a href="https://medium.com/" target="_blank" class="cta-button">Read my Articles on Medium</a>
+        </div>
+    </section>
 
     <footer>
-        <p style="color: #666; margin-bottom: 20px;">HAVE A PROJECT IN MIND?</p>
-        <a href="https://lk.linkedin.com/in/s-sachin" target="_blank" class="contact-link">Get in touch.</a>
-        <p style="margin-top: 80px; font-size: 0.8rem; color: #444;">&copy; 2025 Sachin — Moratuwa, Sri Lanka</p>
+      <p>Designed & Built by Sachin</p>
+      <div style="margin-top: 10px; font-size: 1.2rem;">
+        <a href="https://lk.linkedin.com/in/s-sachin" target="_blank" style="margin: 0 10px;"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://github.com/" target="_blank" style="margin: 0 10px;"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:your-email@example.com" style="margin: 0 10px;"><i class="fa-solid fa-envelope"></i></a>
+      </div>
     </footer>
 
     <script>
-        gsap.registerPlugin(ScrollTrigger);
+      // Register ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger);
 
-        // Header animation
-        gsap.from("h1", { opacity: 0, y: 100, duration: 1.5, ease: "power4.out" });
+      // Animation: Fade in Hero Elements
+      const tl = gsap.timeline();
+      tl.from(".logo, .nav-links li, .btn-resume", {
+        y: -20,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power2.out"
+      })
+      .from(".hero-greeting, .hero-name, .hero-subtitle, .hero-desc, .cta-button", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out"
+      }, "-=0.2");
 
-        // Scroll reveal
-        gsap.utils.toArray("section").forEach(section => {
-            gsap.from(section, {
-                opacity: 0,
-                y: 50,
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 80%",
-                },
-                duration: 1
-            });
+      // Animation: Fade in Sections on Scroll
+      gsap.utils.toArray("section").forEach(section => {
+        gsap.from(section.children, {
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
         });
+      });
     </script>
-</body>
+  </body>
 </html>
